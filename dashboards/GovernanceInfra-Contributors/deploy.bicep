@@ -56,7 +56,7 @@ module appService '../../CARML/modules/Microsoft.Web/sites/deploy.bicep' = {
       http20Enabled: false
       functionAppScaleLimit: 200
       minimumElasticInstanceCount: 1
-      netFrameworkVersion: 'v4.0'
+      netFrameworkVersion: '8.0'
       cors: {
         allowedOrigins: [
           'https://portal.azure.com'
@@ -82,7 +82,9 @@ module appServiceSettings '../../CARML/modules/Microsoft.Web/sites/config-appset
     appInsightId: appInsights.outputs.resourceId
     appSettingsKeyValuePairs: {
       FUNCTIONS_EXTENSION_VERSION: '~4'
-      FUNCTIONS_WORKER_RUNTIME: 'dotnet'
+      FUNCTIONS_WORKER_RUNTIME: 'dotnet-isolated'
+      WEBSITE_USE_PLACEHOLDER_DOTNETISOLATED: 1
+      AzureWebJobsStorage__accountName: storage.outputs.name
     }
   }
 }
